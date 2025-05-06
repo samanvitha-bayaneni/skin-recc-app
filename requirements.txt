@@ -1,12 +1,13 @@
 # Core dependencies
 numpy
 pandas
-opencv-python
+opencv-python-headless
 Pillow
 matplotlib
 seaborn
 plotly
 tqdm
+gdown
 
 # PyTorch and TorchVision
 torch
