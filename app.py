@@ -8,10 +8,15 @@ import pandas as pd
 from torchvision import models, transforms
 from PIL import Image
 import plotly.express as px
+import gdown
 
 # Define constants
 SKIN_TYPE_CLASSES = ['dry', 'normal', 'oily']
 SKIN_ISSUE_CLASSES = ['acne', 'bags', 'redness', 'wrinkles', 'spots', 'scar']
+
+def download_from_gdrive(file_id, output_path):
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, output_path, quiet=False)
 
 class SkinClassificationModel(nn.Module):
     """
@@ -59,23 +64,23 @@ def load_data():
 
 @st.cache_resource
 def load_models():
-    """
-    Loads trained PyTorch models for skin type and skin issue classification.
-    Returns:
-        Tuple of (skin_type_model, skin_issues_model, device)
-    """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     skin_type_model = SkinClassificationModel(num_classes=len(SKIN_TYPE_CLASSES), model_name='efficientnet_b0')
     skin_issues_model = SkinClassificationModel(num_classes=len(SKIN_ISSUE_CLASSES), model_name='resnet50')
 
-    if os.path.exists('Apr_29_models/skin_type_model.pth'):
-        skin_type_model.load_state_dict(torch.load('Apr_29_models/skin_type_model.pth', map_location=device))
-    else:
+    if not os.path.exists('Apr_29_models/skin_type_model.pth'):
         st.warning("Skin type model not found.")
-    if os.path.exists('Apr_30_models/skin_issues_model.pth'):
-        skin_issues_model.load_state_dict(torch.load('Apr_30_models/skin_issues_model.pth', map_location=device))
     else:
-        st.warning("Skin issues model not found.")
+        skin_type_model.load_state_dict(torch.load('Apr_29_models/skin_type_model.pth', map_location=device))
+
+    # Download large model if not present
+    issues_model_path = 'Apr_30_models/skin_issues_model.pth'
+    if not os.path.exists(issues_model_path):
+        st.info("Downloading skin issues model...")
+        os.makedirs(os.path.dirname(issues_model_path), exist_ok=True)
+        download_from_gdrive("1nTD8XKwUwgSKZXMH3Al_rU8YO-wcE1FO", issues_model_path)
+
+    skin_issues_model.load_state_dict(torch.load(issues_model_path, map_location=device))
 
     return skin_type_model.to(device), skin_issues_model.to(device), device
 
