@@ -45,13 +45,9 @@ A Streamlit-powered web app to analyze facial skin from an image:
 * The `skin_issues_model.pth` is not in the repo due to GitHub size limits.
 * It is automatically downloaded at runtime from Google Drive using `gdown`.
 
----
-
 ## 📃 License
 
-MIT License. © 2025 \[Your Name]
-
----
+MIT License. © 2025 
 
 ## 🙌 Acknowledgments
 
