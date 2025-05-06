@@ -1,0 +1,19 @@
+# Core dependencies
+numpy
+pandas
+opencv-python
+Pillow
+matplotlib
+seaborn
+plotly
+tqdm
+
+# PyTorch and TorchVision
+torch
+torchvision
+
+# Scikit-learn
+scikit-learn
+
+# Streamlit for web app
+streamlit
