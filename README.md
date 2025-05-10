@@ -1,7 +1,3 @@
-Absolutely! Here's a ready-to-copy **`README.md`** tailored to your app with the deployment link included:
-
----
-
 ### 📄 `README.md`
 
 ```markdown
@@ -14,7 +10,9 @@ A Streamlit-powered web app to analyze facial skin from an image:
 
 ## 🚀 Live App
 
-👉 Try it now: https://skin-recc-app.streamlit.app/ 
+👉 Try it now: https://skin-recc-app.streamlit.app/
+
+## Medium Post: https://medium.com/@samanvitha9/skinvision-leveraging-deep-learning-for-skin-condition-analysis-6860d9c5add2
 
 ## 📁 Project Structure
 
